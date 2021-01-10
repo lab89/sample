@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo list with tagular</title>    
+    <script src="./js/tagular.js"></script>
+    <style>
+        body {
+            margin: 0;
+            color: #ffffff;
+            background-color: #0f0f0f
+        }
+        .container-box {
+            width: 800px;
+            height: 500px;
+            border: solid 5px #fff;
+            margin-top: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        .contents h1 {
+            margin-top: 30px;
+            margin-bottom: 0px;
+        }
+        .contents ul {
+            margin-top: 50px;
+            
+        }
+        .contents li {
+            width: 100%;
+            border-bottom: solid 1px #fff;
+        }
+    </style>
+</head>
+    
+<body>
+<div class="container-box">
+    <div class="contents">
+        <h1>To Do List</h1>        
+    </div>
+    <div class="inputlist">
+        <h2>INPUT TODO</h2>
+        <h3>if list item click, remove them</h3>
+        
+    </div>    
+</div>
+<script>
+    const todoListReader = tagular.reader("todoList");
+    const container = document.getElementById("container");
+    const todoList = [];
+
+    const renderFunc = (list) => {
+        return tagular.tag`
+            <div>
+                ${
+                    tagular.tag`
+                        <ul>
+                            ${
+                                list.map((d, i) => {                              
+                                    return tagular.tag`<li style="cursor: pointer;"@click="${removeList.bind(null, i)}">${d}</li>`
+                                })
+                            }
+                        </ul>
+                    `
+                }
+                <input id="todoInput"/>
+                <button @click="${addList}" placeholder="INPUT TODO">Add</button>        
+            </div>
+        `
+    } 
+
+    function addList(){
+        const inputTag = document.getElementById("todoInput");
+        todoList.push(inputTag.value);
+        todoListReader(document.body, renderFunc(todoList));
+        inputTag.value = "";
+    }
+
+    function removeList(index, event){
+        event.stopPropagation();
+        todoList.splice(index, 1);     
+        todoListReader(document.getElementsByClassName("inputlist")[0], renderFunc(todoList));
+    }
+
+    todoListReader(document.getElementsByClassName("inputlist")[0], renderFunc(todoList));
+</script>
+</body>
+</html>
