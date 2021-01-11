@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/tagular.js"></script>
+    <style>
+        body {
+            margin: 0;
+            color: #ffffff;
+            background-color: #0f0f0f
+        }
+        .container-box {
+            width: 800px;
+            height: 500px;
+            border: solid 5px #fff;
+            margin-top: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        .contents h1 {
+            margin-top: 30px;
+            margin-bottom: 0px;
+        }
+        .contents ul {
+            margin-top: 50px;
+            
+        }
+        .contents li {
+            width: 100%;
+            border-bottom: solid 1px #fff;
+        }
+        #text {
+            position: relative;                  
+        }
+    </style>
+</head>
+<body>    
+    <div class="container-box">
+        <div class="contents">
+            <h1>INPUT</h1>        
+            <h2>TEXT CHANGE</h2>
+        </div>
+        <div id="text">
+            <ul id = "list">
+
+            </ul>
+        </div>
+        <button type="text" onclick="change(this)">change same count </button>
+        <button type="text" onclick="changeM(this)">change more count </button>
+        <button type="text" onclick="changeL(this)">change less count </button>
+
+    </div>
+    <script>
+        let listItems = [
+            {
+                name : "kim",
+                age : 25
+            },
+            {
+                name : "hong",
+                age : 33
+            },
+            {
+                name : "choi",
+                age : 26
+            }
+        ]
+
+        function change(){
+            listItems = [
+                {
+                    name : "park",
+                    age : 52
+                },
+                {
+                    name : "yang",
+                    age : 41
+                },
+                {
+                    name : "noh",
+                    age : 46
+                }
+            ]
+            listReader(document.getElementById("list"), listRender())
+        }
+
+        function changeM(){
+            listItems = [
+                {
+                    name : "park",
+                    age : 52
+                },
+                {
+                    name : "yang",
+                    age : 41
+                },
+                {
+                    name : "noh",
+                    age : 46
+                },
+                {
+                    name : "jang",
+                    age : 56
+                },
+                {
+                    name : "Ahn",
+                    age : 46
+                }
+            ]
+            listReader(document.getElementById("list"), listRender())
+        }
+        function changeL(){
+            listItems = [            
+                {
+                    name : "jang",
+                    age : 56
+                },
+                {
+                    name : "Ahn",
+                    age : 46
+                }
+            ]
+            listReader(document.getElementById("list"), listRender())
+        }
+        
+        const listReader = tagular.reader("listReader");
+        const listRender = () =>{
+            return tagular.tag`
+                ${
+                    listItems.map((d)=>{
+                        return tagular.tag`<li>${d.name}, ${d.age}</li>`
+                    })
+                }
+            `
+        }        
+        listReader(document.getElementById("list"), listRender())
+    </script>
+</body>
+</html>
