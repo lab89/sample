@@ -95,7 +95,7 @@
                 },
                 {
                     name : "yang",
-                    age : 41
+                    age : 21
                 },
                 {
                     name : "noh",
@@ -103,7 +103,7 @@
                 },
                 {
                     name : "jang",
-                    age : 56
+                    age : 26
                 },
                 {
                     name : "Ahn",
@@ -120,7 +120,7 @@
                 },
                 {
                     name : "Ahn",
-                    age : 46
+                    age : 26
                 }
             ]
             listReader(document.getElementById("list"), listRender())
@@ -131,7 +131,7 @@
             return tagular.tag`
                 ${
                     listItems.map((d)=>{
-                        return tagular.tag`<li>${d.name}, ${d.age}</li>`
+                        return tagular.tag`<li style="${ d.age > 40 ? "color: cyan" : "color: white"}">${d.name}, ${d.age}</li>`                        
                     })
                 }
             `

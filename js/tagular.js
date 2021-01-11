@@ -10547,9 +10547,12 @@ function diff(oldTag, newTag, OPH, NPH) {
         }
     }
     else {
-        oldTag.punchingHole.forEach(function (d) {
+        while (OPH.target.length) {
             OPH.target.shift().remove();
-        });
+        }
+        // oldTag.punchingHole.forEach((d: HTMLElement)=>{
+        //     OPH.target.shift().remove();
+        // })
         OPH.value.shift();
         recursive(newTag);
         while (newTag.fragment.children[0].childNodes.length) {
